@@ -6,9 +6,9 @@ use Iocaste\Microservice\Foundation\Data\Models\Parameter\Parameter;
 use Iocaste\Microservice\Foundation\Http\Requests\Request;
 
 /**
- * Class AbstractStoreParameterRequest.
+ * Class ValidatesParameters.
  */
-abstract class AbstractStoreParameterRequest extends Request
+abstract class ValidatesParameters extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,10 @@ abstract class AbstractStoreParameterRequest extends Request
      */
     public function rules(): array
     {
-        return Parameter::all()
+        $input = array_keys($this->request->all());
+
+        return Parameter::whereIn('id', $input)
+            ->get()
             ->mapWithKeys(function ($item) {
                 return [$item['id'] => $item->rules];
             })->all();
