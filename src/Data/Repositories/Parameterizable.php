@@ -38,9 +38,9 @@ trait Parameterizable
      *
      * @return array|bool|float|int|mixed|null
      */
-    public function getValue(Parameter $parameter, $model)
+    public function getValue(Parameter $parameter, Model $model)
     {
-        $modelParameter = $this->getUserParameter($model, $parameter->id);
+        $modelParameter = $this->getModelParameter($model, $parameter->id);
 
         if (! $modelParameter) {
             if ($parameter->type === 'boolean') {
@@ -72,16 +72,16 @@ trait Parameterizable
 
     /**
      * @param Parameter $parameter
-     * @param null $userParameter
+     * @param null $modelParameter
      *
      * @return array|null
      */
-    protected function getParameterSelectedChoice(Parameter $parameter, $userParameter = null): ?array
+    protected function getParameterSelectedChoice(Parameter $parameter, $modelParameter = null): ?array
     {
-        $userParameterValue = $userParameter->value;
+        $modelParameterValue = $modelParameter->value;
 
         $value = $parameter->choices()
-            ->where('id', $userParameterValue)
+            ->where('id', $modelParameterValue)
             ->where('parameter_id', $parameter->id)
             ->first();
 
@@ -97,13 +97,13 @@ trait Parameterizable
     }
 
     /**
-     * @param User $user
+     * @param Model $model
      * @param $parameterId
      * @return Model
      */
-    protected function getUserParameter(User $user, $parameterId)
+    protected function getModelParameter(Model $model, $parameterId)
     {
-        $filtered = $user->parameters->filter(function ($value, $key) use ($parameterId) {
+        $filtered = $model->parameters->filter(function ($value, $key) use ($parameterId) {
             return $value->parameter_id === $parameterId;
         });
 
