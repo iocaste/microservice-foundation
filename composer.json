@@ -27,8 +27,7 @@
         "illuminate/validation": "~5.5.0",
         "illuminate/http": "~5.5.0",
         "tymon/jwt-auth": "dev-develop#035fd9d53d64816dd782cded5f114560f686c535",
-        "league/fractal": "^0.17.0",
-        "prettus/l5-repository": "~2.6"
+        "league/fractal": "^0.17.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
