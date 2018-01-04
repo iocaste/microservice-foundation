@@ -2,6 +2,7 @@
 
 namespace Iocaste\Microservice\Foundation\Transformer;
 
+use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
 
 /**
@@ -13,7 +14,6 @@ abstract class Transformer extends TransformerAbstract
      * Checks if specified resource has been requested as query string parameter.
      * @param string $resource
      *
-     * @throws \Illuminate\Container\EntryNotFoundException
      * @return bool
      */
     protected function isRequested($resource = null): bool
@@ -30,14 +30,27 @@ abstract class Transformer extends TransformerAbstract
 
         $includes = explode(',', $includes);
 
-        if (! is_array($includes)) {
+        if (! \is_array($includes)) {
             return false;
         }
 
-        if (! in_array($resource, $includes, false)) {
+        if (! \in_array($resource, $includes, false)) {
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * @param Carbon $dateTime
+     *
+     * @return array
+     */
+    protected function getTimeStampAndDate(Carbon $dateTime): array
+    {
+        return [
+            'timestamp' => $dateTime->getTimestamp(),
+            'date_time' => $dateTime->format(DATETIME_FULL_FORMAT),
+        ];
     }
 }
