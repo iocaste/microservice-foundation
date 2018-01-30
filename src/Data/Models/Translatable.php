@@ -13,7 +13,7 @@ trait Translatable
      * @param $value
      * @return array
      */
-    public function getTranslationAttribute($value): array
+    public function getTranslationAttribute($value): ?array
     {
         return json_decode($value, true);
     }
