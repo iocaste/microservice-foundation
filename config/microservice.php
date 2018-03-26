@@ -167,7 +167,7 @@ return [
             /**
              * Path to service provider
              */
-            'provider' => \Iocaste\Microservice\Foundation\Provider\FormRequestServiceProvider::class,
+            'provider' => \Iocaste\Form\Providers\FormRequestServiceProvider::class,
 
             /**
              * If lumen is used, config variable will be used to fire "configure" method.

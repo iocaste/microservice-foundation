@@ -5,6 +5,7 @@ namespace Iocaste\Microservice\Foundation\Http\Requests;
 use Iocaste\Microservice\Foundation\Http\Responds;
 use Illuminate\Http\JsonResponse;
 use Iocaste\Microservice\Foundation\Http\ApiResponse;
+use Iocaste\Form\Http\FormRequest;
 
 /**
  * Class Request.
@@ -32,7 +33,7 @@ abstract class Request extends FormRequest
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function forbiddenResponse()
+    public function forbiddenResponse(): JsonResponse
     {
         return $this->respondForbidden();
     }
