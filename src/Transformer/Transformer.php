@@ -42,15 +42,15 @@ abstract class Transformer extends TransformerAbstract
     }
 
     /**
-     * @param Carbon $dateTime
+     * @param Carbon|null $dateTime
      *
-     * @return array
+     * @return array|null
      */
-    protected function getTimeStampAndDate(Carbon $dateTime): array
+    protected function getTimeStampAndDate(?Carbon $dateTime): ?array
     {
-        return [
+        return ($dateTime == null) ? null : [
             'timestamp' => $dateTime->getTimestamp(),
-            'date_time' => $dateTime->format(DATETIME_FULL_FORMAT),
+            'date_time' => $dateTime->format(DATETIME_FULL_FORMAT ?? 'd.m.Y H:i:s'),
         ];
     }
 }
