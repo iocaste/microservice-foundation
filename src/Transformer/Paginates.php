@@ -2,26 +2,25 @@
 
 namespace Iocaste\Microservice\Foundation\Transformer;
 
-use \Prettus\Repository\Eloquent\BaseRepository;
-
 /**
  * Trait Paginates
  */
 trait Paginates
 {
     /**
-     * @param $builder BaseRepository
+     * @param $builder
      * @param $transformer
+     * @param string $key
      * @param int $perPage
      *
      * @return array
      */
-    protected function paginatedCollection(BaseRepository $builder, $transformer, $perPage = 14): array
+    protected function paginatedCollection($builder, $transformer, string $key = 'data', $perPage = 14): array
     {
         $paginator = $builder->paginate($perPage);
 
         return [
-            fractal(
+            $key => fractal(
                 $paginator->getCollection(),
                 $transformer,
                 new DataArraySerializer()
@@ -41,6 +40,6 @@ trait Paginates
                 'to' => $paginator->lastItem(),
                 'has_more' => $paginator->hasMorePages(),
             ],
-        ][0];
+        ];
     }
 }
