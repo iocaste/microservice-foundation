@@ -29,7 +29,8 @@
         "tymon/jwt-auth": "dev-develop#035fd9d53d64816dd782cded5f114560f686c535",
         "league/fractal": "^0.17.0",
         "prettus/l5-repository": "~2.6",
-        "iocaste/lumen-form-requests": "dev-master"
+        "iocaste/lumen-form-requests": "dev-master",
+        "spatie/laravel-fractal": "^5.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
