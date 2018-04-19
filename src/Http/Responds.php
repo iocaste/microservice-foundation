@@ -67,11 +67,12 @@ trait Responds
      * Return response with error.
      *
      * @param null $code
-     * @param $message
+     * @param null $message
+     * @param array $data
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function respondWithError($code = null, $message = null): JsonResponse
+    public function respondWithError($code = null, $message = null, array $data = []): JsonResponse
     {
         return $this->respond([
             'status' => [
@@ -80,6 +81,7 @@ trait Responds
                 'code' => $code,
                 'http_code' => $this->getStatusCode(),
             ],
+            'exception' => $data,
         ]);
     }
 
