@@ -59,8 +59,9 @@ class MicroserviceHandler extends ExceptionHandler
         }
 
         $data = [];
+        $status = 500;
 
-        if (config('app.debug')) {
+        if (env('APP_DEBUG')) {
             $data = [
                 'exception' => \get_class($e),
                 'code' => $e->getCode(),
@@ -72,8 +73,6 @@ class MicroserviceHandler extends ExceptionHandler
         if ($this->isHttpException($e)) {
             // Grab the HTTP status code from the Exception
             $status = $e->getStatusCode();
-        } else {
-            $status = 500;
         }
 
         return $this->setStatusCode($status)
@@ -82,5 +81,16 @@ class MicroserviceHandler extends ExceptionHandler
                 'API internal error occurred. Please contact support for details.',
                 $data
             );
+    }
+
+    /**
+     * Determine if the given exception is an HTTP exception.
+     *
+     * @param \Exception $e
+     * @return bool
+     */
+    protected function isHttpException(Exception $e): bool
+    {
+        return $e instanceof HttpException;
     }
 }
