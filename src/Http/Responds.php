@@ -3,7 +3,7 @@
 namespace Iocaste\Microservice\Foundation\Http;
 
 use Illuminate\Http\Response as IlluminateResponse;
-use Iocaste\Microservice\Foundation\Http\ApiResponse;
+use App\Http\Controllers\V1\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
 /**
