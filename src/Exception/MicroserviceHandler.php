@@ -1,6 +1,6 @@
 <?php
 
-namespace Iocaste\Microservice\Exception;
+namespace Iocaste\Microservice\Foundation\Exception;
 
 use \Iocaste\Microservice\Foundation\Http\ApiResponse;
 use Exception;
