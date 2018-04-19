@@ -3,7 +3,7 @@
 namespace Iocaste\Microservice\Foundation\Http;
 
 use Illuminate\Http\Response as IlluminateResponse;
-use App\Http\Controllers\V1\ApiResponse;
+use Iocaste\Microservice\Foundation\Http\ApiResponse;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -25,7 +25,7 @@ trait Responds
      *
      * @return $this
      */
-    public function setStatusCode($statusCode)
+    public function setStatusCode($statusCode): self
     {
         $this->statusCode = $statusCode;
 
