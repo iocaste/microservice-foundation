@@ -66,9 +66,10 @@ class MicroserviceHandler extends ExceptionHandler
                 'exception' => \get_class($e),
                 'code' => $e->getCode(),
                 'message' => $e->getMessage(),
-                'trace' => $e->getTrace(),
+                'trace' => $e->getTraceAsString(),
             ];
         }
+
 
         if ($this->isHttpException($e)) {
             // Grab the HTTP status code from the Exception
