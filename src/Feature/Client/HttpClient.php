@@ -45,12 +45,13 @@ class HttpClient
 
     /**
      * @param bool $toJson
+     * @param bool $toAssociative
      *
      * @return mixed
      */
-    public function getResponse($toJson = false)
+    public function getResponse($toJson = false, $toAssociative = false)
     {
-        return $toJson ? json_decode($this->response) : $this->response;
+        return $toJson ? json_decode($this->response, $toAssociative) : $this->response;
     }
 
     /**
