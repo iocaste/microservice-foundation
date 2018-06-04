@@ -179,7 +179,7 @@ class HttpClient
         $this->currentUri = $request->fullUrl();
         $options = [];
 
-        if ($request->method() === 'POST') {
+        if ($request->method() === 'POST' || $request->method() === 'PUT') {
             $options['json'] = $request->request->all();
         }
 
