@@ -41,6 +41,9 @@
     "autoload": {
         "psr-4": {
             "Iocaste\\Microservice\\Foundation\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     }
 }
