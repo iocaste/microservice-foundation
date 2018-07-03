@@ -27,6 +27,6 @@ trait Translatable
     {
         $locale = app()->translator->getLocale();
 
-        return $this->translation[$locale];
+        return $this->translation[$locale] ?? null;
     }
 }
