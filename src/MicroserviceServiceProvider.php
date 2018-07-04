@@ -3,6 +3,7 @@
 namespace Iocaste\Microservice\Foundation;
 
 use Illuminate\Support\ServiceProvider;
+use Iocaste\Microservice\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use Laravel\Lumen\Application as LumenApplication;
 use Illuminate\Foundation\Application as LaravelApplication;
 
@@ -39,6 +40,8 @@ class MicroserviceServiceProvider extends ServiceProvider
                 $this->app->register($service['provider']);
             }
         }
+
+        app()->middleware(ConvertEmptyStringsToNull::class);
     }
 
     /**
