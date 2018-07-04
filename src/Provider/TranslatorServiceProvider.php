@@ -9,10 +9,6 @@ use Illuminate\Support\ServiceProvider;
  */
 class TranslatorServiceProvider extends ServiceProvider
 {
-    protected $defaultLanguages = [
-        'ru',
-        'en',
-    ];
 
     /**
      * Bootstrap the application services.
@@ -27,18 +23,6 @@ class TranslatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $lang = app('request')->get('lang');
-
-        if (! $lang) {
-            $lang = app('request')->segment(1);
-        }
-
-        if (! in_array($lang, $this->defaultLanguages, true)) {
-            $lang = env('DEFAULT_LOCALE', 'ru');
-        }
-
-        if (app('translator')->getLocale() !== $lang) {
-            app('translator')->setLocale($lang);
-        }
+        $this->app->middleware(\Iocaste\Microservice\Foundation\Http\Middleware\TranslatorMiddleware::class);
     }
 }
