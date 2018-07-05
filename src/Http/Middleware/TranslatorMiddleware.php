@@ -8,21 +8,10 @@ use Closure;
 class TranslatorMiddleware
 {
     /**
-     * @var array
-     */
-    protected $defaultLanguages = [
-        'ru',
-        'en',
-    ];
-
-    /**
      * Run the request filter.
      *
      * @param $request
      * @param Closure $next
-     * @param bool $validateBelongsTo
-     * @param null $resource
-     *
      * @return \Illuminate\Http\JsonResponse|mixed
      */
     public function handle($request, Closure $next)
@@ -33,7 +22,7 @@ class TranslatorMiddleware
             $lang = app('request')->segment(1);
         }
 
-        if (! \in_array($lang, $this->defaultLanguages, true)) {
+        if (! \in_array($lang, config('microservice.enabled_languages'), true)) {
             $lang = env('DEFAULT_LOCALE', 'ru');
         }
 

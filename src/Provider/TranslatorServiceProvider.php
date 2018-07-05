@@ -3,6 +3,7 @@
 namespace Iocaste\Microservice\Foundation\Provider;
 
 use Illuminate\Support\ServiceProvider;
+use Iocaste\Microservice\Foundation\Http\Middleware\TranslatorMiddleware;
 
 /**
  * Class TranslatorServiceProvider
@@ -23,6 +24,6 @@ class TranslatorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->middleware(\Iocaste\Microservice\Foundation\Http\Middleware\TranslatorMiddleware::class);
+        $this->app->middleware(TranslatorMiddleware::class);
     }
 }
