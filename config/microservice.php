@@ -201,5 +201,28 @@ return [
              */
             'config' => 'ide-helper',
         ],
+
+        /**
+         * RWL generators package.
+         */
+        'generators' => [
+            /**
+             * If enabled, then will be preloaded by default
+             */
+            'enabled' => true,
+            /**
+             * Environments, in which service will be preloaded.
+             * Use "*" to preload in all environments
+             */
+            'environments' => ['development', 'local',],
+            /**
+             * Path to service provider
+             */
+            'provider' => \RWL\Generators\Providers\CommandsServiceProvider::class,
+            /**
+             * If lumen is used, config variable will be used to fire "configure" method.
+             */
+            'config' => null,
+        ],
     ],
 ];
