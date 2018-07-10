@@ -218,7 +218,7 @@ return [
             /**
              * Path to service provider
              */
-            'provider' => \RWL\Generators\Providers\CommandsServiceProvider::class,
+            'provider' => \RWL\Generators\CommandsServiceProvider::class,
             /**
              * If lumen is used, config variable will be used to fire "configure" method.
              */
