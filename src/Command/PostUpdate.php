@@ -31,6 +31,10 @@ class PostUpdate extends Command
         $consoleKernel = app(\Illuminate\Contracts\Console\Kernel::class);
 
         $consoleKernel->call('laradox:transform');
+        
+        if (class_exists('RWL\\DataStructure\\Providers\\DataStructureServiceProvider')) {
+            $consoleKernel->call('data-structure:generate');
+        }
 
         if (app()->environment() !== 'production') {
             $consoleKernel->call('ide-helper:generate');
