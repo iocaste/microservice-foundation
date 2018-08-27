@@ -3,7 +3,7 @@
 namespace Iocaste\Microservice\Foundation\Command;
 
 /**
- * Class PostUpdate
+ * Class PostUpdate.
  */
 class PostUpdate extends Command
 {
@@ -31,7 +31,7 @@ class PostUpdate extends Command
         $consoleKernel = app(\Illuminate\Contracts\Console\Kernel::class);
 
         $consoleKernel->call('laradox:transform');
-        
+
         if (class_exists('RWL\\DataStructure\\Providers\\DataStructureServiceProvider')) {
             $consoleKernel->call('data-structure:generate');
         }
