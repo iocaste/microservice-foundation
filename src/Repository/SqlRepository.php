@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 /**
  * Class MysqlRepository.
  */
-abstract class MysqlRepository extends Repository
+abstract class SqlRepository extends Repository
 {
     /**
      * @param array $columns
