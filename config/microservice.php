@@ -9,6 +9,11 @@ return [
     'user_service_base_url' => env('USER_SERVICE_BASE_URL', 'http://user_service/v1/users'),
 
     /**
+     * Languages supported by microservice.
+     */
+    'enabled_languages' => explode(',', env('ENABLED_LANGUAGES', 'ru,en')),
+
+    /**
      * Services that will be preloaded in each microservice instance
      */
     'services' => [
