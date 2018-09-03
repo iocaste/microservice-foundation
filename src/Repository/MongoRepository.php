@@ -7,5 +7,4 @@ namespace Iocaste\Microservice\Foundation\Repository;
  */
 abstract class MongoRepository extends Repository
 {
-
 }

@@ -2,8 +2,9 @@
 
 namespace Iocaste\Microservice\Foundation\Repository;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class MysqlRepository.
