@@ -5,9 +5,8 @@ namespace Iocaste\Microservice\Foundation\Exception\Repository\Criteria\RequestC
 use Exception;
 
 /**
- * Class OrderByParameterContainsIllegalSymbols
+ * Class OrderByParameterContainsIllegalSymbols.
  */
 class OrderByParameterContainsIllegalSymbols extends Exception
 {
-
 }
