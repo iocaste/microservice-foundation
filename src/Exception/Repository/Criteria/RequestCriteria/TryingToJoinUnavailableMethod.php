@@ -5,9 +5,8 @@ namespace Iocaste\Microservice\Foundation\Exception\Repository\Criteria\RequestC
 use Exception;
 
 /**
- * Class TryingToJoinUnavailableMethod
+ * Class TryingToJoinUnavailableMethod.
  */
 class TryingToJoinUnavailableMethod extends Exception
 {
-
 }

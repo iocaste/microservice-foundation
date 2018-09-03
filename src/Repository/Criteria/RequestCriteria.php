@@ -2,12 +2,13 @@
 
 namespace Iocaste\Microservice\Foundation\Repository\Criteria;
 
-use Prettus\Repository\Criteria\RequestCriteria as BaseRequestCriteria;
-use Prettus\Repository\Contracts\RepositoryInterface;
+
 use Illuminate\Database\Eloquent\Relations;
-use ReflectionMethod;
 use Iocaste\Microservice\Foundation\Exception\Repository\Criteria\RequestCriteria\OrderByParameterContainsIllegalSymbols;
 use Iocaste\Microservice\Foundation\Exception\Repository\Criteria\RequestCriteria\TryingToJoinUnavailableMethod;
+use Prettus\Repository\Contracts\RepositoryInterface;
+use Prettus\Repository\Criteria\RequestCriteria as BaseRequestCriteria;
+use ReflectionMethod;
 
 /**
  * Class RequestCriteria
@@ -32,10 +33,10 @@ class RequestCriteria extends BaseRequestCriteria
      * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model $model
      * @param RepositoryInterface $repository
      *
-     * @return mixed
-     *
      * @throws OrderByParameterContainsIllegalSymbols
      * @throws TryingToJoinUnavailableMethod
+     *
+     * @return mixed
      */
     public function apply($model, RepositoryInterface $repository)
     {
@@ -77,11 +78,16 @@ class RequestCriteria extends BaseRequestCriteria
      */
     protected function getOrderParamsAndRemoveThemFromRequest(): array
     {
-        $orderBy = $this->request->get(config('repository.criteria.params.orderBy', 'orderBy'), null);
-        $sortedBy = $this->request->get(config('repository.criteria.params.sortedBy', 'sortedBy'), 'asc');
+        $orderByParameterName = config('repository.criteria.params.orderBy', 'orderBy');
+        $sortByParameterName = config('repository.criteria.params.sortedBy', 'sortedBy');
+
+        $orderBy = $this->request->get($orderByParameterName, null);
+        $sortedBy = $this->request->get($sortByParameterName, 'asc');
 
         if ($orderBy) {
-            $this->request->offsetSet(config('repository.criteria.params.orderBy', 'orderBy'), null);
+            $this->request->attributes->remove($orderByParameterName);
+            $this->request->query->remove($orderByParameterName);
+            $this->request->request->remove($orderByParameterName);
         }
 
         return [
