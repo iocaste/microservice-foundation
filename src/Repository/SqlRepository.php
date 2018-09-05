@@ -2,8 +2,6 @@
 
 namespace Iocaste\Microservice\Foundation\Repository;
 
-use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
@@ -19,7 +17,7 @@ abstract class SqlRepository extends Repository
     public function all($columns = ['*'])
     {
         return parent::all(
-            $this->specifyColumnsTable($columns)
+            $this->getColumnsNames($columns)
         );
     }
 
@@ -31,7 +29,7 @@ abstract class SqlRepository extends Repository
     public function first($columns = ['*'])
     {
         return parent::first(
-            $this->specifyColumnsTable($columns)
+            $this->getColumnsNames($columns)
         );
     }
 
@@ -44,7 +42,7 @@ abstract class SqlRepository extends Repository
     public function lists($column, $key = null)
     {
         return parent::lists(
-            $this->specifyColumnTable($column),
+            $this->getColumnName($column),
             $key
         );
     }
@@ -58,7 +56,7 @@ abstract class SqlRepository extends Repository
     public function pluck($column, $key = null)
     {
         return parent::pluck(
-            $this->specifyColumnTable($column),
+            $this->getColumnName($column),
             $key
         );
     }
@@ -73,7 +71,7 @@ abstract class SqlRepository extends Repository
     {
         return parent::find(
             $id,
-            $this->specifyColumnsTable($columns)
+            $this->getColumnsNames($columns)
         );
     }
 
@@ -87,9 +85,9 @@ abstract class SqlRepository extends Repository
     public function findByField($field, $value = null, $columns = ['*'])
     {
         return parent::findByField(
-            $field,
+            $this->getColumnName($field),
             $value,
-            $this->specifyColumnsTable($columns)
+            $this->getColumnsNames($columns)
         );
     }
 
@@ -101,9 +99,12 @@ abstract class SqlRepository extends Repository
      */
     public function findWhere(array $where, $columns = ['*'])
     {
+        $fields = array_keys($where);
+        $fields = $this->getColumnsNames($fields);
+
         return parent::findWhere(
-            $where,
-            $this->specifyColumnsTable($columns)
+            array_combine($fields, array_values($where)),
+            $this->getColumnsNames($columns)
         );
     }
 
@@ -117,9 +118,9 @@ abstract class SqlRepository extends Repository
     public function findWhereIn($field, array $values, $columns = ['*'])
     {
         return parent::findWhereIn(
-            $field,
+            $this->getColumnName($field),
             $values,
-            $this->specifyColumnsTable($columns)
+            $this->getColumnsNames($columns)
         );
     }
 
@@ -133,9 +134,9 @@ abstract class SqlRepository extends Repository
     public function findWhereNotIn($field, array $values, $columns = ['*'])
     {
         return parent::findWhereNotIn(
-            $field,
+            $this->getColumnName($field),
             $values,
-            $this->specifyColumnsTable($columns)
+            $this->getColumnsNames($columns)
         );
     }
 
@@ -150,7 +151,7 @@ abstract class SqlRepository extends Repository
     {
         return parent::paginate(
             $limit,
-            $this->specifyColumnsTable($columns),
+            $this->getColumnsNames($columns),
             $method
         );
     }
@@ -164,50 +165,23 @@ abstract class SqlRepository extends Repository
     public function orderBy($column, $direction = 'asc')
     {
         return parent::orderBy(
-            $this->specifyColumnTable($column),
+            $this->getColumnName($column),
             $direction
         );
     }
 
     /**
-     * @param $columns
-     *
-     * @return array
-     */
-    public function specifyColumnsTable($columns)
-    {
-        return array_map(function ($column) {
-            return $this->specifyColumnTable($column);
-        }, $columns);
-    }
-
-    /**
-     * @param $column
-     *
-     * @return string
-     */
-    public function specifyColumnTable($column)
-    {
-        return !strpos($column, '.')
-            ? $this->getTableName() . '.' . $column
-            : $column;
-    }
-
-    /**
+     * @param string $column
      * @param mixed $model
      *
      * @return string
      */
-    public function getTableName($model = null)
+    public function getColumnName($column, $model = null): string
     {
         $model = $model ?? $this->model;
 
-        if ($model instanceof Model) {
-            return $model->getTable();
-        } elseif ($model instanceof EloquentBuilder) {
-            return $model->getModel()->getTable();
-        }
-
-        return $model->from;
+        return !strpos($column, '.')
+            ? $this->getTableName($model) . '.' . $column
+            : $column;
     }
 }
