@@ -14,9 +14,8 @@ trait Uuidable
      *
      * @return void
      */
-    protected static function boot()
+    protected static function bootUuidable()
     {
-        parent::boot();
         /**
          * Attach to the 'creating' Model Event to provide a UUID
          * for the `id` field (provided by $model->getKeyName()).
