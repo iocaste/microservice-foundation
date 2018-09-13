@@ -32,14 +32,14 @@ class PostUpdate extends Command
 
         $consoleKernel->call('laradox:transform');
 
-        if (class_exists('RWL\\DataStructure\\Providers\\DataStructureServiceProvider')) {
-            $consoleKernel->call('data-structure:generate');
-        }
-
         if (app()->environment() !== 'production') {
             $consoleKernel->call('ide-helper:generate');
             $consoleKernel->call('ide-helper:models', ['-q']);
             $consoleKernel->call('ide-helper:meta');
+        }
+        
+        if (class_exists('RWL\\DataStructure\\Providers\\DataStructureServiceProvider')) {
+            $consoleKernel->call('data-structure:generate');
         }
     }
 }
