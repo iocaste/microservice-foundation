@@ -27,6 +27,7 @@ trait Paginates
             )->withResourceName(false)->toArray(),
 
             'meta' => [
+                'entity' => $transformer->getEntity(),
                 'pagination' => [
                     'total' => $paginator->total(),
                     'count' => $paginator->count(),
