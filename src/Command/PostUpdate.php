@@ -38,7 +38,7 @@ class PostUpdate extends Command
             $consoleKernel->call('ide-helper:meta');
         }
         
-        if (class_exists('RWL\\DataStructure\\Providers\\DataStructureServiceProvider')) {
+        if (isset($consoleKernel->all()['data-structure:generate'])) {
             $consoleKernel->call('data-structure:generate');
         }
     }
