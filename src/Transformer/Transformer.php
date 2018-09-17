@@ -4,6 +4,7 @@ namespace Iocaste\Microservice\Foundation\Transformer;
 
 use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
+use ReflectionMethod;
 
 /**
  * Class Transformer
@@ -62,7 +63,7 @@ abstract class Transformer extends TransformerAbstract
      */
     public function getEntity(): ?string
     {
-        $reflection = new \ReflectionMethod($this, 'transform');
+        $reflection = new ReflectionMethod($this, 'transform');
         if (! $reflection->getNumberOfParameters()) {
             return null;
         }
