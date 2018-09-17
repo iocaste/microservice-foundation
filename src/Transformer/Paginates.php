@@ -27,6 +27,8 @@ trait Paginates
             )->withResourceName(false)->toArray(),
 
             'meta' => [
+                'service' => env('APP_SERVICE_NAME'),
+                'entity' => $transformer->getEntity(),
                 'pagination' => [
                     'total' => $paginator->total(),
                     'count' => $paginator->count(),
