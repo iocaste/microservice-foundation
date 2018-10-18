@@ -3,14 +3,25 @@
 namespace Iocaste\Microservice\Foundation\Data\Models;
 
 /**
- * Class Translatable
+ * Class Translatable.
  */
 trait Translatable
 {
     /**
+     * Get translatable fields list.
+     *
+     * @return array
+     */
+    public function getTranslatable(): array
+    {
+        return $this->translatable ?? [];
+    }
+
+    /**
      * Get translation array.
      *
      * @param $value
+     *
      * @return array
      */
     public function getTranslationAttribute($value): ?array
