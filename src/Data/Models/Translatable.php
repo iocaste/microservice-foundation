@@ -8,6 +8,16 @@ namespace Iocaste\Microservice\Foundation\Data\Models;
 trait Translatable
 {
     /**
+     * Get translatable fields list.
+     *
+     * @return array
+     */
+    public function getTranslatable(): array
+    {
+        return $this->translatable ?? [];
+    }
+
+    /**
      * Get translation array.
      *
      * @param $value
