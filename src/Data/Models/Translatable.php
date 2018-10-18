@@ -3,7 +3,7 @@
 namespace Iocaste\Microservice\Foundation\Data\Models;
 
 /**
- * Class Translatable
+ * Class Translatable.
  */
 trait Translatable
 {
@@ -21,6 +21,7 @@ trait Translatable
      * Get translation array.
      *
      * @param $value
+     *
      * @return array
      */
     public function getTranslationAttribute($value): ?array
