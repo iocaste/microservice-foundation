@@ -14,6 +14,6 @@ trait ServesFeatures
      */
     public function serve($job)
     {
-        return dispatch(...func_get_args());
+        return dispatch_now(...\func_get_args());
     }
 }
