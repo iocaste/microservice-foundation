@@ -50,8 +50,8 @@ abstract class Transformer extends TransformerAbstract
     protected function getTimeStampAndDate(?Carbon $dateTime): ?array
     {
         return ($dateTime == null) ? null : [
-            'timestamp' => $dateTime->getTimestamp(),
-            'date_time' => $dateTime->format(DATETIME_FULL_FORMAT ?? 'd.m.Y H:i:s'),
+            // 'timestamp' => $dateTime->getTimestamp(),
+            // 'date_time' => $dateTime->format(DATETIME_FULL_FORMAT ?? 'd.m.Y H:i:s'),
             'iso_8601_zulu' => $dateTime->toIso8601ZuluString(),
         ];
     }
