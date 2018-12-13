@@ -33,13 +33,17 @@ class MicroserviceHandler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param Exception $e
+     * @param Exception $exception
      *
      * @throws Exception
      */
-    public function report(Exception $e): void
+    public function report(Exception $exception): void
     {
-        parent::report($e);
+        if (app()->bound('sentry') && $this->shouldReport($exception)) {
+            app('sentry')->captureException($exception);
+        }
+
+        parent::report($exception);
     }
 
     /**
